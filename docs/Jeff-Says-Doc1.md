@@ -5,8 +5,6 @@ nav_order: 20
 og_languages: ["en","client2"]
 ---
 
-{% include translate.html %}
-
 # This is a one hashtag markup
 
 This page has only two translations

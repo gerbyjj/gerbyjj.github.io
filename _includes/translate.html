@@ -3,7 +3,9 @@
       Current Translation: {% t langs.{{ site.lang }} %}
     </div>
     <div class="post" style="float: right">
-      Translate: 
+      {% if page.og_languages.size > 0 %}
+        Translate:
+      {% endif %}
       <!-- Adds links to other languages on the post -->
       {% for lang in page.og_languages %}
         {% unless site.lang == lang %}
@@ -12,13 +14,13 @@
           {% else %}
             <a href="{{ site.baseurl_root }}/{{ lang }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
           {% endif %}
-          
+
           {% assign next = forloop.index | plus: 1 %}
-          
+
           {% if forloop.last != true and page.og_languages[forloop.index] != site.lang or page.og_languages[forloop.index] == site.lang and next < forloop.length %}
             <span class="separator"> &bull; </span>
           {% endif %}
-          
+
         {% endunless %}
       {% endfor %}
     </div>

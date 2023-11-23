@@ -5,8 +5,6 @@ nav_order: 10
 og_languages: ["en","client1","client2"]
 ---
 
-{% include translate.html %}
-  
 # Purchasing Assistant {% t 'Client' %}  
 
 <details open markdown="block">
