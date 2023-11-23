@@ -2,33 +2,12 @@
 layout: default
 title: Purchasing Assistant
 nav_order: 10
-languages: ["en","client1","client2"]
+og_languages: ["en","client1","client2"]
 ---
 
-# Purchasing Assistant {% t 'Client' %}
-
-  <div class="post">
-    <div align="right">
-      Translate: 
-      <!-- Adds links to other languages on the post -->
-      {% for lang in page.languages %}
-        {% unless site.lang == lang %}
-          {% if lang == site.default_lang and site.default_locale_in_subfolder != true %}
-            <a href="{{ site.baseurl_root }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
-          {% else %}
-            <a href="{{ site.baseurl_root }}/{{ lang }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
-          {% endif %}
-          
-          {% assign next = forloop.index | plus: 1 %}
-          
-          {% if forloop.last != true and page.languages[forloop.index] != site.lang or page.languages[forloop.index] == site.lang and next < forloop.length %}
-            <span class="separator"> &bull; </span>
-          {% endif %}
-          
-        {% endunless %}
-      {% endfor %}
-    </div>
-  </div>
+{% include translate.html %}
+  
+# Purchasing Assistant {% t 'Client' %}  
 
 <details open markdown="block">
   <summary>

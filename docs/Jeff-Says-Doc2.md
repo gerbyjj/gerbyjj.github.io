@@ -4,6 +4,8 @@ title: Jeff Said
 nav_order: 30
 ---
 
+{% include translate.html %}
+
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 There should be whitespace between paragraphs.

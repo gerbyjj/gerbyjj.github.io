@@ -1,0 +1,25 @@
+  <div class="post">
+    <div class="post" style="float: left">
+      Current Translation: {% t langs.{{ site.lang }} %}
+    </div>
+    <div class="post" style="float: right">
+      Translate: 
+      <!-- Adds links to other languages on the post -->
+      {% for lang in page.og_languages %}
+        {% unless site.lang == lang %}
+          {% if lang == site.default_lang and site.default_locale_in_subfolder != true %}
+            <a href="{{ site.baseurl_root }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
+          {% else %}
+            <a href="{{ site.baseurl_root }}/{{ lang }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
+          {% endif %}
+          
+          {% assign next = forloop.index | plus: 1 %}
+          
+          {% if forloop.last != true and page.og_languages[forloop.index] != site.lang or page.og_languages[forloop.index] == site.lang and next < forloop.length %}
+            <span class="separator"> &bull; </span>
+          {% endif %}
+          
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div><br>
