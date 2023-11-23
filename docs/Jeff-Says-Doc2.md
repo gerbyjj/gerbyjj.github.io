@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Jeff Said
-nav_order: 2
+nav_order: 30
 ---
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.

@@ -1,0 +1,11 @@
+---
+Client: Default
+Catalogue: Catalogue
+catalogue: catalogue
+Contract: Standing Offer
+Release: SPO
+
+langs:
+  client1: Client1
+  client2: Client2
+  en: default

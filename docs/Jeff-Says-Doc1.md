@@ -1,12 +1,36 @@
 ---
 layout: default
 title: Jeff Says
-nav_order: 1
+nav_order: 20
+languages: ["en","client2"]
 ---
 
 # This is a one hashtag markup
 
-Just for testing
+  <div class="post">
+    <div align="right">
+      Translate: 
+      <!-- Adds links to other languages on the post -->
+      {% for lang in page.languages %}
+        {% unless site.lang == lang %}
+          {% if lang == site.default_lang and site.default_locale_in_subfolder != true %}
+            <a href="{{ site.baseurl_root }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
+          {% else %}
+            <a href="{{ site.baseurl_root }}/{{ lang }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
+          {% endif %}
+          
+          {% assign next = forloop.index | plus: 1 %}
+          
+          {% if forloop.last != true and page.languages[forloop.index] != site.lang or page.languages[forloop.index] == site.lang and next < forloop.length %}
+            <span class="separator"> &bull; </span>
+          {% endif %}
+          
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+
+This page has only two translations
 
 ## This is a two hashtag markup
 

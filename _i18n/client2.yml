@@ -1,0 +1,11 @@
+---
+Client: Client 2
+Catalogue: Catalog
+catalogue: catalog
+Contract: Contract
+Release: Release
+
+langs:
+  client1: Client1
+  client2: Client2
+  en: default

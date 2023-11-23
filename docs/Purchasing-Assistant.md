@@ -1,10 +1,35 @@
 ---
 layout: default
 title: Purchasing Assistant
-nav_order: 1
+nav_order: 10
+languages: ["en","client1","client2"]
 ---
 
-# Purchasing Assistant
+# Purchasing Assistant {% t 'Client' %}
+
+  <div class="post">
+    <div align="right">
+      Translate: 
+      <!-- Adds links to other languages on the post -->
+      {% for lang in page.languages %}
+        {% unless site.lang == lang %}
+          {% if lang == site.default_lang and site.default_locale_in_subfolder != true %}
+            <a href="{{ site.baseurl_root }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
+          {% else %}
+            <a href="{{ site.baseurl_root }}/{{ lang }}{{ page.url }}" >{% t langs.{{ lang }} %}</a>
+          {% endif %}
+          
+          {% assign next = forloop.index | plus: 1 %}
+          
+          {% if forloop.last != true and page.languages[forloop.index] != site.lang or page.languages[forloop.index] == site.lang and next < forloop.length %}
+            <span class="separator"> &bull; </span>
+          {% endif %}
+          
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+
 <details open markdown="block">
   <summary>
     Table of contents
@@ -13,6 +38,75 @@ nav_order: 1
 - TOC
 {:toc}
 </details>
+
+## Purchasing Assistant Actions
+
+#### Create a {% t 'Release' %}
+- Security: Purchase Assist Features: "Can Create {% t 'Release' %}s?"
+- {% t 'Contract' %} exists in the Master {% t 'Catalogue' %}.
+- The profile's Issued For organization is a permitted user of the {% t 'Contract' %}.
+- {% t 'Contract' %} items are returned as Sources in the Sourcing Panel under search results.
+- {% t 'Contract' %}s will be limited to XXX when Profile indicates "Warehouse Replenishment".
+
+#### Release against a specific {% t 'Contract' %} Item
+- {% t 'Contract' %} item is not defined as generic item presentation.
+
+#### Release against a generic {% t 'Contract' %} Item
+- {% t 'Contract' %} item is defined as generic item presentation.
+- Search finds the {% t 'Release' %} items against the generic {% t 'Contract' %} item.
+
+#### Punch Out 
+- {% t 'Contract' %} is defined as Punch Out.
+- We don't have a way to test this at the moment.
+
+#### Create a Purchase Order
+- Security: Purchase Assist Features: "Can Create Purchase Orders (other than {% t 'Release' %}s)?"
+
+#### Create a Purchase Order (source is a Purchase Order in the Master {% t 'Catalogue' %})
+- Purchase Order exists in the Master {% t 'Catalogue' %}.
+- The profile's Issued For organization is XXX.
+- Purchase Order items are returned as Sources in the Sourcing Panel under search results.
+- When these items are actioned, the source item pricing is retained on the resultant document.
+
+#### Create a Purchase Order (source is a Historical Purchase)
+- Source document does not need to exist in the Master {% t 'Catalogue' %}.
+- Purchase Order and {% t 'Release' %} items are returned as Historical Purchases under the Sourcing Panel.
+- Historical Purchases are provided as reference for Material searches only:
+  - All Client 2 searches
+  - Search: Ext Whse PRs
+  - Search: Search and availability = Material {% t 'Catalogue' %}
+- Historical Purchases are limited by personal preferences under "Purchasing Assistant Profile Settings":
+  - Num of Purchase Orders to display
+  - Num of Purchase Order Drawdowns to display
+  - Num of months to display
+- If user does not have these settings, the limits are defined in System Characteristics/ Miscellaneous definitions, under "Purchasing Assistant".
+- When these items are actioned, the source item pricing is not retained on the resultant document.
+
+#### Create a Purchase Order (not based on a source)
+- No vendor, no pricing is associated with these items in the cart.
+- A vendor will be assigned upon document creation.
+
+#### Create a Requisition
+- Security: Purchase Assist Features: "Can Create Purchase Requests?"
+
+#### Create a Stores Requisition (ABCD for Client 2)
+- Issued For Org is not a Warehouse Owner (Client 2)
+
+#### Create a Print Requisition
+- Client 3 only
+- {% t 'Catalogue' %} refer id is like the default print item code (system char)
+
+#### Create a Replenishment Requisition
+- Profile indicates "Warehouse Replenishment" (Client 1)
+- Issued For Org is a Warehouse Owner (Client 2)
+
+#### Create a Purchasing Requisition
+- Profile does not indicate "Warehouse Replenishment" and Search availability = Commodity {% t 'Catalogue' %} (Client 1)
+
+#### Create a Quick Quote
+- Security: Purchase Assist Features: "Can Create Quotes?"
+
+* * *
 
 ## Purchasing Assistant Tabs
 
@@ -54,81 +148,11 @@ nav_order: 1
 
 #### Warehouse Document
 - Not applicable (default)
-  - Material Catalogue will not be an option in Search availability.
+  - Material {% t 'Catalogue' %} will not be an option in Search availability.
 - Warehouse - Replenishment
 
 * * *
 
-## Purchasing Assistant Actions
-
-#### Create a Release/SPO
-- Security: Purchase Assist Features: "Can Create SPOs?"
-- Contract exists in the Master Catalogue.
-- The profile's Issued For organization is a permitted user of the Contract.
-- Contract items are returned as Sources in the Sourcing Panel under search results.
-- Contracts will be limited to XXX when Profile indicates "Warehouse Replenishment".
-
-#### Release against a specific Contract/Standing Offer Item
-- Contract item is not defined as generic item presentation.
-
-#### Release against a generic Contract/Standing Offer Item
-- Contract item is defined as generic item presentation.
-- Search finds the SPO items against the generic Contract item.
-
-#### Punch Out 
-- Contract is defined as Punch Out.
-- We don't have a way to test this at the moment.
-
-#### Create a Purchase Order
-- Security: Purchase Assist Features: "Can Create Purchase Orders (other than SPOs)?"
-
-#### Create a Purchase Order (source is a Purchase Order in the Master Catalogue)
-- Purchase Order exists in the Master Catalogue.
-- The profile's Issued For organization is XXX.
-- Purchase Order items are returned as Sources in the Sourcing Panel under search results.
-- When these items are actioned, the source item pricing is retained on the resultant document.
-
-#### Create a Purchase Order (source is a Historical Purchase)
-- Source document does not need to exist in the Master Catalogue.
-- Purchase Order and SPO items are returned as Historical Purchases under the Sourcing Panel.
-- Historical Purchases are provided as reference for Material searches only:
-  - All Client 2 searches
-  - Search: Ext Whse PRs
-  - Search: Search and availability = Material Catalogue
-- Historical Purchases are limited by personal preferences under "Purchasing Assistant Profile Settings":
-  - Num of Purchase Orders to display
-  - Num of Purchase Order Drawdowns to display
-  - Num of months to display
-- If user does not have these settings, the limits are defined in System Characteristics/ Miscellaneous definitions, under "Purchasing Assistant".
-- When these items are actioned, the source item pricing is not retained on the resultant document.
-
-#### Create a Purchase Order (not based on a source)
-- No vendor, no pricing is associated with these items in the cart.
-- A vendor will be assigned upon document creation.
-
-#### Create a Requisition
-- Security: Purchase Assist Features: "Can Create Purchase Requests?"
-
-#### Create a Stores Requisition (ABCD for Client 2)
-- Issued For Org is not a Warehouse Owner (Client 2)
-
-#### Create a Print Requisition
-- Client 3 only
-- Catalogue refer id is like the default print item code (system char)
-
-#### Create a Replenishment Requisition
-- Profile indicates "Warehouse Replenishment" (Client 1)
-- Issued For Org is a Warehouse Owner (Client 2)
-
-#### Create a Purchasing Requisition
-- Profile does not indicate "Warehouse Replenishment" and Search availability = Commodity Catalogue (Client 1)
-
-#### Create a Quick Quote
-- Security: Purchase Assist Features: "Can Create Quotes?"
-
-* * *
-
 ## Other Features
-- Equivalent Item relationship between Master Catalogue items.
-- Master Catalogue items are cached.
-
+- Equivalent Item relationship between Master {% t 'Catalogue' %} items.
+- Master {% t 'Catalogue' %} items are cached.
