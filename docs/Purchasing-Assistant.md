@@ -44,6 +44,7 @@ og_languages: ["en","client1","client2"]
 - The profile's Issued For organization is XXX.
 - Purchase Order items are returned as Sources in the Sourcing Panel under search results.
 - When these items are actioned, the source item pricing is retained on the resultant document.
+- Janice added this info now.
 
 #### Create a Purchase Order (source is a Historical Purchase)
 - Source document does not need to exist in the Master {% t 'Catalogue' %}.
@@ -83,6 +84,24 @@ og_languages: ["en","client1","client2"]
 #### Create a Quick Quote
 - Security: Purchase Assist Features: "Can Create Quotes?"
 
+{% assign client_list = "en,client1" | split:"," %}
+{% if client_list contains site.lang %}
+* * *
+
+## This is for the default and client1 client ##
+
+You should only see this for the default and client1 client.
+
+{% endif %}
+{% assign client_list = "client1,client2" | split:"," %}
+{% unless client_list contains site.lang %}
+* * *
+
+## This is not for client1 or client2 client ##
+
+You should not see this for the client1 or client2 client.
+
+{% endunless %}
 * * *
 
 ## Purchasing Assistant Tabs

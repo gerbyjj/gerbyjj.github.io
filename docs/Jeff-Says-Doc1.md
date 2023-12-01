@@ -19,3 +19,10 @@ Remind me to thank John for a lovely weekend. Forget the fat lady! You're obsess
 
 Did he just throw my cat out of the window? So you two dig up, dig up dinosaurs? You know what? It is beets. I've crashed into a beet truck. I gave it a cold? I gave it a virus. A computer virus. So you two dig up, dig up dinosaurs? We gotta burn the rain forest, dump toxic waste, pollute the air, and rip up the OZONE! 'Cause maybe if we screw up this planet enough, they won't want it anymore!
 
+{% if site.lang == 'en' %}
+
+## This is only for the default client ##
+
+You should only see this for the Default Client.
+
+{% endif %}
