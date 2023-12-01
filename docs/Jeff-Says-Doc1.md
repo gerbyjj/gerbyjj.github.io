@@ -26,3 +26,11 @@ Did he just throw my cat out of the window? So you two dig up, dig up dinosaurs?
 You should only see this for the Default Client.
 
 {% endif %}
+
+## An image that is not client-sensitive
+
+![Alt Text](/images/for-stan.jpg)
+
+## An image that is client-sensitive
+
+![Another Alt Text](/images/client-image-{{site.lang}}.jpg)
